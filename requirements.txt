@@ -1,0 +1,4 @@
+mongoengine~=0.28.0
+beautifulsoup4~=4.12.3
+selenium~=4.18.1
+pushbullet-python~=1.7.0
