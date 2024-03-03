@@ -25,18 +25,15 @@ def commit_new_supras(available_supras_, pb_api_):
         if Supra.objects(registration__exact=supra.registration).count() == 0:
             logging.info("New Supra found: {}".format(supra))
             pb_api_.send_note("Supra Found", "{}".format(supra))
-            supra_document = Supra(registration=supra.registration, year=supra.year, price=supra.price,
-                                   mileage=supra.mileage, distance=supra.distance, sold=False,
-                                   date_added=datetime.now())
-            supra_document.save()
+            supra.save()
 
 
 # If we no longer have an available supra that matches a DB one, mark it as sold
 def check_sold_supras(available_supras_, pb_api_):
     for db_supra in Supra.objects(sold__exact=False):
         found = False
-        for supra in available_supras_:
-            if db_supra.registration == supra.registration:
+        for avail_supra in available_supras_:
+            if db_supra.registration == avail_supra.registration:
                 found = True
 
         if not found:
@@ -56,8 +53,8 @@ def check_for_supras(pb_api_):
     # Get list of active Supras from Toyota, lazy exception handling for the case that network is slower than timeouts
     try:
         available_supras = get_available_supras()
-    except:
-        logging.error("Failed to scrape Toyota website, exiting")
+    except Exception as e:
+        logging.error("Failed to scrape Toyota website: {}, exiting".format(e))
         exit(1)
 
     logging.info("Available Supras: {}".format(len(available_supras)))

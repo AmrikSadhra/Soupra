@@ -5,7 +5,7 @@ from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-from models import SupraObj
+from models import Supra
 import time
 import os
 
@@ -82,6 +82,6 @@ def get_available_supras():
         price = int(price_str[1:].replace(',', ''))
         mileage = int(mileage_str[0:mileage_str.find(' ')].replace(',', ''))
         distance = distance_str[0:distance_str.find(' ')]
-        available_supras.append(SupraObj(registration, year, price, mileage, distance))
+        available_supras.append(Supra(registration, year, price, mileage, distance))
 
     return available_supras
