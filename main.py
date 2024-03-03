@@ -33,7 +33,7 @@ def commit_new_supras(available_supras_, pb_api_):
 
 # If we no longer have an available supra that matches a DB one, mark it as sold
 def check_sold_supras(available_supras_, pb_api_):
-    for db_supra in Supra.objects():
+    for db_supra in Supra.objects(sold__exact=False):
         found = False
         for supra in available_supras_:
             if db_supra.registration == supra.registration:
