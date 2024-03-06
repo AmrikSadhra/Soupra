@@ -20,10 +20,11 @@ class Supra(Document):
         self.mileage = mileage
         self.distance = distance
         self.date_added = datetime.now()
+        self.sold = False
 
     def __str__(self):
-        return "{} | {} | £{} | {} miles | {} miles away | {} {}".format(self.registration, self.year, self.price,
+        return "{} | {} | {} GBP | {} miles | {} miles away | {} {}".format(self.registration, self.year, self.price,
                                                                          self.mileage,
                                                                          self.distance,
-                                                                         "Available" if self.sold else "Sold, on market for:",
+                                                                         "Sold, on market for:" if self.sold else "Available",
                                                                          self.date_sold - self.date_added if self.sold else "")

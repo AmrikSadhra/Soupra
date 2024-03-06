@@ -40,8 +40,8 @@ def check_sold_supras(available_supras_, pb_api_):
             db_supra.sold = True
             db_supra.date_sold = datetime.now()
             db_supra.save()
-            logging.info("Supra sold :( {}".format(db_supra))
-            pb_api_.send_note("Supra Sold :(", "{}".format(db_supra))
+            logging.info("Supra sold: {}".format(db_supra))
+            pb_api_.send_note("Supra Sold", "{}".format(db_supra))
 
 
 def check_for_supras(pb_api_):
